@@ -1,36 +1,36 @@
 import React, { Component } from 'react';
 import './Snacks.css';
 import BrowseSnacks from '../BrowseSnacks/BrowseSnacks'
-import { getAllSnacks } from '../../Helpers/apiCalls'
+import { getAllSnacksIds, getSnackDetail } from '../../Helpers/apiCalls'
 
 class Snacks extends Component {
   constructor() {
     super();
     this.state = {
-      // allSnackDetails: [],
-      allSnackIds: [],
-      allSnackPrices: [],
+      allSnacksDetails: {},
+      allSnacksIds: [],
+      allSnacksPrices: [],
       recurringSnacks: [],
       error: '',
     }
   }
 
-  componentDidMount() {
-    getAllSnacks()
+  async componentDidMount() {
+    await getAllSnacksIds()
       .then(randomSnackIds => {
-        this.setState({ allSnackIds: randomSnackIds })
+        this.setState({ allSnacksIds: randomSnackIds})
       })
-   
-    // getAllSnacks()
-    //   .then((snacks) => {
-    //     const fetchedSnackIds = snacks.map((snack) => {
-    //       return snack.products.sku
-    //     })
-    //     this.setState({ allSnackIds: fetchedSnackIds, error: '' });
-    //   })
-    //   .catch((err) => {
-    //     this.setState({ error: "We're sorry, something went wrong. Please try again." });
-    //   });
+    this.state.allSnacksIds.forEach(snackId => {
+        getSnackDetail(snackId)  
+          .then(snackDetail => {
+            this.setState( prevState => ({ 
+              allSnacksDetails: {
+                ...prevState.allSnacksDetails,
+                [snackId]: snackDetail.name
+              }
+            }) )
+          })
+      })
   }
 
   render() {
