@@ -9,7 +9,7 @@ class Snacks extends Component {
     this.state = {
       allSnacksDetails: {},
       allSnacksIds: [],
-      recurringSnacks: [],
+      recurringSnacks: {}, // {id: {quantity: 1, paused: false}}
       error: '',
     }
   }
@@ -56,12 +56,17 @@ class Snacks extends Component {
   }
 
   render() {
-    const { allSnacksDetails, allSnacksIds } = this.state;
+    const { allSnacksDetails, allSnacksIds, recurringSnacks } = this.state;
     return (
-      <BrowseSnacks
-        allSnacksDetails={allSnacksDetails}
-        allSnacksIds={allSnacksIds}
-      />
+      <>
+        { Object.keys(allSnacksDetails).length === 10 &&
+          <BrowseSnacks
+          allSnacksDetails={allSnacksDetails}
+          allSnacksIds={allSnacksIds}
+          recurringSnacks={recurringSnacks}
+        />
+        }
+      </>
     )
   }
 }
