@@ -18,14 +18,24 @@ export const getSnackDetail = (snackId) => {
     .then((data) => {
       let fetchedDetail = {};
 
-      fetchedDetail.name = data.descriptions[0];
+      if (data.descriptions.consumer) {
+        fetchedDetail.name = data.descriptions.consumer;
+      } else {
+        fetchedDetail.name = data.name;
+      }
+
+      // data.descriptions.consumer ? fetchedDetail.name = data.descriptions.consumer : fetchedDetail.name = data.name;
+
       fetchedDetail.brand = data.brand;
       fetchedDetail.sizeValue = data.size.value;
       fetchedDetail.sizeUnit = data.size.unitOfMeasure;
       fetchedDetail.allergens = data.allergens;
-      fetchedDetail.ingredients = data.ingredients
-      fetchedDetail.organic = data.organic.agency
-      fetchedDetail.image = data.tradeIdentifiers[0]
+      fetchedDetail.ingredients = data.ingredients;
+      fetchedDetail.organic = data.organic.agency;
+      
+      if (data.tradeIdentifiers.length > 0) {      
+      fetchedDetail.image = data.tradeIdentifiers[0].images[0]
+      }
 
       return fetchedDetail
     })
