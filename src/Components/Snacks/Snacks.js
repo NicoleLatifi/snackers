@@ -26,10 +26,19 @@ class Snacks extends Component {
             this.setState( prevState => ({ 
               allSnacksDetails: {
                 ...prevState.allSnacksDetails,
-                [snackId]: snackDetail.name
+                [snackId]: {
+                  name: snackDetail.name,
+                  brand: snackDetail.brand,
+                  sizeValue: snackDetail.sizeValue,
+                  sizeUnit: snackDetail.sizeUnit,
+                  allergens: snackDetail.allergens,
+                  ingredients: snackDetail.ingredients,
+                  organic: snackDetail.organic,
+                  image: snackDetail.image
               }
-            }) )
-          })
+            }
+          }))
+        })
       })
   }
 
