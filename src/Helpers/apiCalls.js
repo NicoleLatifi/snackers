@@ -30,3 +30,9 @@ export const getSnackDetail = (snackId) => {
       return fetchedDetail
     })
 }
+
+export const getSnackPrice = (snackId) => {
+  return fetch(`https://api.wegmans.io/products/${snackId}/prices?api-version=2018-10-18&subscription-key=c455d00cb0f64e238a5282d75921f27e`)
+    .then((response) => response.json())
+    .then((data) => { return data.stores[0].price })
+}
