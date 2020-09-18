@@ -16,9 +16,17 @@ export const getSnackDetail = (snackId) => {
   return fetch(`https://api.wegmans.io/products/${snackId}?api-version=2018-10-18&Subscription-Key=c455d00cb0f64e238a5282d75921f27e`)
     .then((response) => response.json())
     .then((data) => {
-      let fetchedDetail = {
-      };
-      fetchedDetail.name = data.name
+      let fetchedDetail = {};
+
+      fetchedDetail.name = data.descriptions[0];
+      fetchedDetail.brand = data.brand;
+      fetchedDetail.sizeValue = data.size.value;
+      fetchedDetail.sizeUnit = data.size.unitOfMeasure;
+      fetchedDetail.allergens = data.allergens;
+      fetchedDetail.ingredients = data.ingredients
+      fetchedDetail.organic = data.organic.agency
+      fetchedDetail.image = data.tradeIdentifiers[0]
+
       return fetchedDetail
     })
 }
