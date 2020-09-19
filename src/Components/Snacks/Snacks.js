@@ -69,6 +69,32 @@ class Snacks extends Component {
     }))
   }
 
+  decreaseRecurringQuantity = (snackId) => {
+    this.setState( prevState => ({
+      recurringSnacks: {
+        ...prevState.recurringSnacks,
+        [snackId]: {
+          ...prevState.recurringSnacks[snackId],
+          quantity: this.state.recurringSnacks[snackId].quantity - 1,
+          paused: false
+        }
+      }
+    }))
+  }
+
+  increaseRecurringQuantity = (snackId) => {
+    this.setState( prevState => ({
+      recurringSnacks: {
+        ...prevState.recurringSnacks,
+        [snackId]: {
+          ...prevState.recurringSnacks[snackId],
+          quantity: this.state.recurringSnacks[snackId].quantity + 1,
+          paused: false
+        }
+      }
+    }))
+  }
+
   render() {
     const { allSnacksDetails, allSnacksIds, recurringSnacks } = this.state;
     return (
@@ -79,6 +105,8 @@ class Snacks extends Component {
           allSnacksIds={allSnacksIds}
           recurringSnacks={recurringSnacks}
           addSnack={this.addSnack}
+          decreaseRecurringQuantity={this.decreaseRecurringQuantity}
+          increaseRecurringQuantity={this.increaseRecurringQuantity}
         />
         }
       </>
