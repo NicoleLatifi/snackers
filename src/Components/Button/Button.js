@@ -5,11 +5,10 @@ class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonText: '',
     }
   }
 
-  handleAddClick = () => {
+  handleClick = () => {
     if (this.props.buttonText === "Add") {
       this.props.addSnack(this.props.snackId)
     }
@@ -17,7 +16,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button aria-label={`${this.props.buttonText} snack`} onClick={this.handleAddClick} >{this.props.buttonText}</button>
+      <button aria-label={`${this.props.buttonText} snack`} onClick={this.handleClick} >{this.props.buttonText}</button>
     )
   }
 }
