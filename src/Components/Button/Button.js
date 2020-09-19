@@ -9,9 +9,13 @@ class Button extends Component {
     }
   }
 
+  handleAddClick = () => {
+    this.props.addSnack(this.props.snackId)
+  }
+
   render() {
     return (
-      <button>Add</button>
+      <button aria-lable="Add snack" onClick={this.handleClick} >Add</button>
     )
   }
 }
