@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Snacks.css';
 import BrowseSnacks from '../BrowseSnacks/BrowseSnacks'
 import { getAllSnacksIds, getSnackDetail, getSnackPrice } from '../../Helpers/apiCalls'
+import noImage from "../../Helpers/icons/snack.png"
 
 class Snacks extends Component {
   constructor() {
@@ -33,7 +34,7 @@ class Snacks extends Component {
                 allergens: snackDetail.allergens,
                 ingredients: snackDetail.ingredients,
                 organic: snackDetail.organic,
-                image: snackDetail.image
+                image: snackDetail.image ? snackDetail.image : noImage
             }
           }
         }))
