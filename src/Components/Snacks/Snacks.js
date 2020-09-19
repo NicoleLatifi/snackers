@@ -1,43 +1,75 @@
 import React, { Component } from 'react';
 import './Snacks.css';
 import BrowseSnacks from '../BrowseSnacks/BrowseSnacks'
-import { getAllSnacks } from '../../Helpers/apiCalls'
+import { getAllSnacksIds, getSnackDetail, getSnackPrice } from '../../Helpers/apiCalls'
+import noImage from "../../Helpers/icons/snack.png"
 
 class Snacks extends Component {
   constructor() {
     super();
     this.state = {
-      // allSnackDetails: [],
-      allSnackIds: [],
-      allSnackPrices: [],
-      recurringSnacks: [],
+      allSnacksDetails: {},
+      allSnacksIds: [],
+      recurringSnacks: {}, // {id: {quantity: 1, paused: false}}
       error: '',
     }
   }
 
-  componentDidMount() {
-    getAllSnacks()
+  async componentDidMount() {
+    await getAllSnacksIds()
       .then(randomSnackIds => {
-        this.setState({ allSnackIds: randomSnackIds })
+        this.setState({ allSnacksIds: randomSnackIds})
+    })
+    this.state.allSnacksIds.forEach(snackId => {
+      getSnackDetail(snackId)  
+        .then(snackDetail => {
+          this.setState( prevState => ({ 
+            allSnacksDetails: {
+              ...prevState.allSnacksDetails,
+              [snackId]: {
+                name: snackDetail.name,
+                brand: snackDetail.brand,
+                sizeValue: snackDetail.sizeValue,
+                sizeUnit: snackDetail.sizeUnit,
+                allergens: snackDetail.allergens,
+                ingredients: snackDetail.ingredients,
+                organic: snackDetail.organic,
+                image: snackDetail.image ? snackDetail.image : noImage
+            }
+          }
+        }))
       })
-   
-    // getAllSnacks()
-    //   .then((snacks) => {
-    //     const fetchedSnackIds = snacks.map((snack) => {
-    //       return snack.products.sku
-    //     })
-    //     this.setState({ allSnackIds: fetchedSnackIds, error: '' });
-    //   })
-    //   .catch((err) => {
-    //     this.setState({ error: "We're sorry, something went wrong. Please try again." });
-    //   });
+    })
+    this.state.allSnacksIds.forEach(snackId => {
+      getSnackPrice(snackId)
+        .then(snackPrice => {
+          this.setState( prevState => ({ 
+            allSnacksDetails: {
+              ...prevState.allSnacksDetails,
+              [snackId]: {
+                ...prevState.allSnacksDetails[snackId],
+                price: snackPrice
+              }
+            }
+        }))
+      })
+    })
   }
 
   render() {
+    const { allSnacksDetails, allSnacksIds, recurringSnacks } = this.state;
     return (
-      <BrowseSnacks />  
-    ) 
-  };
+      <>
+        { Object.keys(allSnacksDetails).length === 10 &&
+          <BrowseSnacks
+          allSnacksDetails={allSnacksDetails}
+          allSnacksIds={allSnacksIds}
+          recurringSnacks={recurringSnacks}
+        />
+        }
+      </>
+    )
+  }
 }
 
 export default Snacks;
