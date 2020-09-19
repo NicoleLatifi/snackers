@@ -20,11 +20,8 @@ class Button extends Component {
   handleClick = () => {
     if (this.props.buttonType === "Decrease") {
       this.props.decreaseRecurringQuantity(this.props.snackId)
-      console.log("aaa")
-    }
-    if (this.props.buttonType === "Increase") {
+    } else {
       this.props.increaseRecurringQuantity(this.props.snackId)
-      console.log("bbb")
     }
   }
 
