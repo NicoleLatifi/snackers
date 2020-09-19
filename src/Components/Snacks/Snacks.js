@@ -10,6 +10,7 @@ class Snacks extends Component {
     this.state = {
       allSnacksDetails: {},
       allSnacksIds: [],
+      recurringSnacksIds: [],
       error: '',
     }
   }
@@ -68,6 +69,7 @@ class Snacks extends Component {
         }
       }
     }))
+    this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
   }
 
   decreaseRecurringQuantity = (snackId) => {
@@ -89,10 +91,14 @@ class Snacks extends Component {
           [snackId]: {
             ...prevState.allSnacksDetails[snackId],
             recurringStatus: "zeroed",
-            quantity: this.state.allSnacksDetails[snackId].quantity - 1,
+            quantity: 0,
           }
         }
       }))
+      let recurringSnacksIdsCopy = [...this.state.recurringSnacksIds]
+      const index = recurringSnacksIdsCopy.indexOf(snackId)
+      recurringSnacksIdsCopy.splice(index, 1)
+      this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
     }
   }
 
