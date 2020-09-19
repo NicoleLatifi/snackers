@@ -1,9 +1,12 @@
 import React from 'react';
 import './BrowsingSnackCard.css';
 import Button from '../Button/Button'
+import QuantityButton from '../QuantityButton/QuantityButton'
 
 const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnack }) => {
   const snackDetails = allSnacksDetails[snackId]
+  const recurringSnacksList = Object.keys(recurringSnacks)
+  
   return (
   <>
     <h2>Snack Name</h2>
@@ -14,11 +17,16 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnac
     <p>{snackDetails.allergens}</p>
     <p>{snackDetails.organic}</p>
 
-    { !Object.keys(recurringSnacks).includes(snackId) &&
+    { !recurringSnacksList.includes(snackId.toString()) &&
       <Button
         buttonText="Add" 
         snackId={snackId} 
         addSnack={addSnack} 
+      /> }
+    { recurringSnacksList.includes(snackId.toString()) &&
+      <QuantityButton
+        snackId={snackId}
+        recurringSnacks={recurringSnacks}
       /> }
   </>  
   );
