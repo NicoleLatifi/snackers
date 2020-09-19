@@ -2,7 +2,7 @@ import React from 'react';
 import './BrowsingSnackCard.css';
 import Button from '../Button/Button'
 
-const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks }) => {
+const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnack }) => {
   const snackDetails = allSnacksDetails[snackId]
   return (
   <>
@@ -15,7 +15,11 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks }) => {
     <p>{snackDetails.organic}</p>
 
     { !Object.keys(recurringSnacks).includes(snackId) &&
-      <Button buttonText="Add" /> }
+      <Button
+        buttonText="Add" 
+        snackId={snackId} 
+        addSnack={addSnack} 
+      /> }
   </>  
   );
 }
