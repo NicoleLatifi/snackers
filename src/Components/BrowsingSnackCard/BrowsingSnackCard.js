@@ -28,14 +28,14 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
       <div className="quantity-buttons-container">
         <QuantityButton
           snackId={snackId}
-          buttonType="decrease"
+          buttonType="Decrease"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
         /> 
         <span>{allSnacksDetails[snackId].quantity}</span>
         <QuantityButton
           snackId={snackId}
-          buttonType="increase"
+          buttonType="Increase"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
         /> 
