@@ -56,6 +56,19 @@ class Snacks extends Component {
     })
   }
 
+  addSnack = (snackId) => {
+    this.setState( prevState => ({
+      recurringSnacks: {
+        ...prevState.recurringSnacks,
+        [snackId]: {
+          ...prevState.recurringSnacks[snackId],
+          quantity: 1,
+          paused: false
+        }
+      }
+    }))
+  }
+
   render() {
     const { allSnacksDetails, allSnacksIds, recurringSnacks } = this.state;
     return (
@@ -65,6 +78,7 @@ class Snacks extends Component {
           allSnacksDetails={allSnacksDetails}
           allSnacksIds={allSnacksIds}
           recurringSnacks={recurringSnacks}
+          addSnack={this.addSnack}
         />
         }
       </>
