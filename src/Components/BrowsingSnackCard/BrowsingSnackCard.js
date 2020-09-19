@@ -3,9 +3,8 @@ import './BrowsingSnackCard.css';
 import Button from '../Button/Button'
 import QuantityButton from '../QuantityButton/QuantityButton'
 
-const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
+const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
   const snackDetails = allSnacksDetails[snackId]
-  const recurringSnacksList = Object.keys(recurringSnacks)
   
   return (
   <>
@@ -17,26 +16,26 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnac
     <p>{snackDetails.allergens}</p>
     <p>{snackDetails.organic}</p>
 
-    { !recurringSnacksList.includes(snackId.toString()) &&
+    { allSnacksDetails[snackId].quantity === 0 &&
       <Button
         buttonText="Add" 
         snackId={snackId} 
         addSnack={addSnack} 
-      /> }
-    { recurringSnacksList.includes(snackId.toString()) &&
+      /> 
+    }
+
+    { allSnacksDetails[snackId].quantity > 0 &&
       <div className="quantity-buttons-container">
         <QuantityButton
           snackId={snackId}
-          recurringSnacks={recurringSnacks}
-          buttonType="Decrease"
+          buttonType="decrease"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
         /> 
-        <span>{recurringSnacks[snackId].quantity}</span>
+        <span>{allSnacksDetails[snackId].quantity}</span>
         <QuantityButton
           snackId={snackId}
-          recurringSnacks={recurringSnacks}
-          buttonType="Increase"
+          buttonType="increase"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
         /> 
@@ -47,3 +46,32 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnac
 }
 
 export default BrowsingSnackCard;
+
+
+// { !recurringSnacksList.includes(snackId.toString()) &&
+//   <Button
+//     buttonText="Add" 
+//     snackId={snackId} 
+//     addSnack={addSnack} 
+//   /> 
+// }
+
+// { recurringSnacksList.includes(snackId.toString()) &&
+//   <div className="quantity-buttons-container">
+//     <QuantityButton
+//       snackId={snackId}
+//       recurringSnacks={recurringSnacks}
+//       buttonType="Decrease"
+//       decreaseRecurringQuantity={decreaseRecurringQuantity}
+//       increaseRecurringQuantity={increaseRecurringQuantity}
+//     /> 
+//     <span>{recurringSnacks[snackId].quantity}</span>
+//     <QuantityButton
+//       snackId={snackId}
+//       recurringSnacks={recurringSnacks}
+//       buttonType="Increase"
+//       decreaseRecurringQuantity={decreaseRecurringQuantity}
+//       increaseRecurringQuantity={increaseRecurringQuantity}
+//     /> 
+//   </div>
+// }
