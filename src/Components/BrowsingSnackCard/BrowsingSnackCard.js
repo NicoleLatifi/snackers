@@ -3,7 +3,7 @@ import './BrowsingSnackCard.css';
 import Button from '../Button/Button'
 import QuantityButton from '../QuantityButton/QuantityButton'
 
-const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnack }) => {
+const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
   const snackDetails = allSnacksDetails[snackId]
   const recurringSnacksList = Object.keys(recurringSnacks)
   
@@ -24,10 +24,24 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, recurringSnacks, addSnac
         addSnack={addSnack} 
       /> }
     { recurringSnacksList.includes(snackId.toString()) &&
-      <QuantityButton
-        snackId={snackId}
-        recurringSnacks={recurringSnacks}
-      /> }
+      <div className="quantity-buttons-container">
+        <QuantityButton
+          snackId={snackId}
+          recurringSnacks={recurringSnacks}
+          buttonType="Decrease"
+          decreaseRecurringQuantity={decreaseRecurringQuantity}
+          increaseRecurringQuantity={increaseRecurringQuantity}
+        /> 
+        <span>{recurringSnacks[snackId].quantity}</span>
+        <QuantityButton
+          snackId={snackId}
+          recurringSnacks={recurringSnacks}
+          buttonType="Increase"
+          decreaseRecurringQuantity={decreaseRecurringQuantity}
+          increaseRecurringQuantity={increaseRecurringQuantity}
+        /> 
+      </div>
+    }
   </>  
   );
 }
