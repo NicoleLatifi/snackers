@@ -5,17 +5,17 @@ class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonText: ''
+      // buttonText: ''
     }
   }
 
-  componentDidMount = () => {
-    if (this.props.buttonType === "Decrease") {
-      this.setState({ buttonText: "-" })
-    } else {
-      this.setState({ buttonText: "+"})
-    }
-  }
+  // componentDidMount = () => {
+  //   if (this.props.buttonType === "Decrease") {
+  //     this.setState({ buttonText: "-" })
+  //   } else {
+  //     this.setState({ buttonText: "+"})
+  //   }
+  // }
 
   handleClick = () => {
     if (this.props.buttonType === "Decrease") {
@@ -27,7 +27,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button aria-label={`${this.props.buttonType} quantity`} onClick={this.handleClick} >{this.state.buttonText}</button>
+      <button aria-label={`${this.props.buttonType} quantity`} onClick={this.handleClick} >{this.props.buttonText}</button>
     )
   }
 }
