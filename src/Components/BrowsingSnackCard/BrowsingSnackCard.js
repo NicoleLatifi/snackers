@@ -28,6 +28,7 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
       <div className="quantity-buttons-container">
         <QuantityButton
           snackId={snackId}
+          buttonText="-"
           buttonType="Decrease"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
@@ -35,6 +36,7 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
         <span>{allSnacksDetails[snackId].quantity}</span>
         <QuantityButton
           snackId={snackId}
+          buttonText="+"
           buttonType="Increase"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
@@ -46,32 +48,3 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
 }
 
 export default BrowsingSnackCard;
-
-
-// { !recurringSnacksList.includes(snackId.toString()) &&
-//   <Button
-//     buttonText="Add" 
-//     snackId={snackId} 
-//     addSnack={addSnack} 
-//   /> 
-// }
-
-// { recurringSnacksList.includes(snackId.toString()) &&
-//   <div className="quantity-buttons-container">
-//     <QuantityButton
-//       snackId={snackId}
-//       recurringSnacks={recurringSnacks}
-//       buttonType="Decrease"
-//       decreaseRecurringQuantity={decreaseRecurringQuantity}
-//       increaseRecurringQuantity={increaseRecurringQuantity}
-//     /> 
-//     <span>{recurringSnacks[snackId].quantity}</span>
-//     <QuantityButton
-//       snackId={snackId}
-//       recurringSnacks={recurringSnacks}
-//       buttonType="Increase"
-//       decreaseRecurringQuantity={decreaseRecurringQuantity}
-//       increaseRecurringQuantity={increaseRecurringQuantity}
-//     /> 
-//   </div>
-// }
