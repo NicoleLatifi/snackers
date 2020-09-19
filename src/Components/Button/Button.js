@@ -10,12 +10,14 @@ class Button extends Component {
   }
 
   handleAddClick = () => {
-    this.props.addSnack(this.props.snackId)
+    if (this.props.buttonText === "Add") {
+      this.props.addSnack(this.props.snackId)
+    }
   }
 
   render() {
     return (
-      <button aria-lable="Add snack" onClick={this.handleClick} >Add</button>
+      <button aria-label={`${this.props.buttonText} snack`} onClick={this.handleAddClick} >{this.props.buttonText}</button>
     )
   }
 }
