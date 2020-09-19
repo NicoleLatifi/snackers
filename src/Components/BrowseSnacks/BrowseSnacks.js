@@ -2,7 +2,7 @@ import React from 'react';
 import './BrowseSnacks.css';
 import BrowsingSnackCard from '../BrowsingSnackCard/BrowsingSnackCard'
 
-const BrowseSnacks = ({ allSnacksDetails, allSnacksIds, recurringSnacks, addSnack }) => {
+const BrowseSnacks = ({ allSnacksDetails, allSnacksIds, recurringSnacks, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
   return (
     allSnacksIds.map((snackId) => {
       return <BrowsingSnackCard
@@ -10,6 +10,8 @@ const BrowseSnacks = ({ allSnacksDetails, allSnacksIds, recurringSnacks, addSnac
       snackId={snackId}
       recurringSnacks={recurringSnacks}
       addSnack={addSnack}
+      decreaseRecurringQuantity={decreaseRecurringQuantity}
+      increaseRecurringQuantity={increaseRecurringQuantity}
       key={snackId}
       />
     })
