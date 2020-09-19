@@ -5,13 +5,18 @@ class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonText: '',
+    }
+  }
+
+  handleClick = () => {
+    if (this.props.buttonText === "Add") {
+      this.props.addSnack(this.props.snackId)
     }
   }
 
   render() {
     return (
-      <button>Add</button>
+      <button aria-label={`${this.props.buttonText} snack`} onClick={this.handleClick} >{this.props.buttonText}</button>
     )
   }
 }
