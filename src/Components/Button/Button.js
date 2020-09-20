@@ -9,15 +9,15 @@ class Button extends Component {
   }
 
   handleClick = () => {
-    const { snackId, buttonText, addSnack, removeFromRecurring } = this.props
+    const { snackId, buttonText, addSnack, removeFromRecurring, pauseRecurringSnack } = this.props
     if (buttonText === "Add") {
       addSnack(this.props.snackId)
     } else if (buttonText === "Reactivate") {
-
+      addSnack(this.props.snackId)
     } else if (buttonText === "Remove") {
       removeFromRecurring(snackId)
     } else if (buttonText === "Pause") {
-
+      pauseRecurringSnack(snackId)
     }
   }
 
