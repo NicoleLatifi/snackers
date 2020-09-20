@@ -4,19 +4,22 @@ import BrowsingSnackCard from '../BrowsingSnackCard/BrowsingSnackCard'
 
 const BrowseSnacks = ({ allSnacksDetails, allSnacksIds, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
   return (
-    allSnacksIds.map((snackId) => {
+    allSnacksIds.reduce((browsingSnacksCards, snackId ) => {
       if(Object.keys(allSnacksDetails).includes(snackId.toString())) {
-        return <BrowsingSnackCard
-        allSnacksDetails={allSnacksDetails}
-        snackId={snackId}
-        addSnack={addSnack}
-        decreaseRecurringQuantity={decreaseRecurringQuantity}
-        increaseRecurringQuantity={increaseRecurringQuantity}
-        key={snackId}
-      />
+        browsingSnacksCards.push(
+          <BrowsingSnackCard
+          allSnacksDetails={allSnacksDetails}
+          snackId={snackId}
+          addSnack={addSnack}
+          decreaseRecurringQuantity={decreaseRecurringQuantity}
+          increaseRecurringQuantity={increaseRecurringQuantity}
+          key={snackId}
+          />
+        )
       }
-    })
-  );
+      return browsingSnacksCards
+    }, [])
+  )
 }
 
 export default BrowseSnacks;
