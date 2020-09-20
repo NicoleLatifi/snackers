@@ -1,39 +1,43 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { screen, render } from '@testing-library/react'
+import { screen, render, fireEvent } from '@testing-library/react'
 import RecurringSnackCard from './RecurringSnackCard'
 
 describe('BrowsingSnackCard Component', () => {
-  let allSnacksDetails, recurringSnacksIds, snackId
+  let allSnacksDetails
   beforeEach(() => {
     allSnacksDetails = {
       101: {
         name: "Chips",
-        brand: "Wegmans",
-        price: 2,
+        brand: "Lays",
+        price: 1,
         sizeValue: 10,
         sizeUnit: "OZ",
         image: "https://wfmproducts.azureedge.net/images-500/00077890461808.jpg",
         quantity: 1,
         recurringStatus: "active"
+      },
+      202: {
+        name: "Popcorn",
+        quantity: 0,
+        recurringStatus: "paused"
       }
     }
-    recurringSnacksIds = [101]
-    snackId = 101
   })
 
-  it('Should display the correct content when rendered', () => {
+  it('Should display the correct content when rendering active snack', () => {
+    const snackId = 101
+
     render (
       <RecurringSnackCard 
         allSnacksDetails={allSnacksDetails}
-        recurringSnacksIds={recurringSnacksIds}
         snackId={snackId}
       />
     )
 
     const name = screen.getByRole('heading', { name: 'Chips'})
-    const brand = screen.getByText('Wegmans')
-    const price = screen.getByText('$2 / 10 OZ')
+    const brand = screen.getByText('Lays')
+    const price = screen.getByText('$1 / 10 OZ')
     const image = screen.getByRole('img', { name: 'Chips'})
     const decreaseButton = screen.getByRole('button', {name: 'Decrease quantity'})
     const increaseButton = screen.getByRole('button', {name: 'Increase quantity'})
@@ -48,25 +52,22 @@ describe('BrowsingSnackCard Component', () => {
     expect(pauseButton).toBeInTheDocument
   })
 
-  it('Should render any recurring snacks', () => {
-    // const recurringSnacksIds = [101]
+  it('Should display the correct content when rendering active snack', () => {
+    const snackId = 202
 
-    // render (
-    //   <RecurringSnacks 
-    //     allSnacksDetails={allSnacksDetails}
-    //     recurringSnacksIds={recurringSnacksIds}
-    //   />
-    // )
+    render (
+      <RecurringSnackCard 
+        allSnacksDetails={allSnacksDetails}
+        snackId={snackId}
+      />
+    )
 
-    // const name = screen.getByRole('heading', { name: 'Chips'})
+    const name = screen.getByRole('heading', { name: 'Popcorn'})
+    const reactivateButton = screen.getByRole('button', {name: 'Reactivate snack'})
+    const removeButton = screen.getByRole('button', {name: 'Remove snack'})
 
-    // expect(name).toBeInTheDocument
+    expect(name).toBeInTheDocument
+    expect(reactivateButton).toBeInTheDocument
+    expect(removeButton).toBeInTheDocument
   })
 })
-
-
-// Should display the correct content when rendered
-// Should change buttons and state when quantity is decreased to zero
-// Should change buttons and state when snack is paused
-// Should change buttons and state when snack is reactivated
-// Should remove snack when removed
