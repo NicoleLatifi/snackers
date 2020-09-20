@@ -74,7 +74,7 @@ class Snacks extends Component {
     this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
   }
 
-  decreaseRecurringQuantity = (snackId) => {
+  decreaseRecurringQuantity = (snackId, fromRecurringPage) => {
     if (this.state.allSnacksDetails[snackId].quantity > 1) {
       this.setState( prevState => ({
         allSnacksDetails: {
@@ -97,10 +97,12 @@ class Snacks extends Component {
           }
         }
       }))
-      let recurringSnacksIdsCopy = [...this.state.recurringSnacksIds]
-      const index = recurringSnacksIdsCopy.indexOf(snackId)
-      recurringSnacksIdsCopy.splice(index, 1)
-      this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
+      if (fromRecurringPage === false) {
+        let recurringSnacksIdsCopy = [...this.state.recurringSnacksIds]
+        const index = recurringSnacksIdsCopy.indexOf(snackId)
+        recurringSnacksIdsCopy.splice(index, 1)
+        this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
+      }
     }
   }
 
@@ -117,7 +119,7 @@ class Snacks extends Component {
   }
 
   render() {
-    const { allSnacksDetails, allSnacksIds, recurringSnacks } = this.state;
+    const { allSnacksDetails, allSnacksIds, recurringSnacksIds } = this.state;
     return (
       <Switch>
         <Route 
@@ -141,7 +143,7 @@ class Snacks extends Component {
             return (
               <RecurringSnacks
                 allSnacksDetails={allSnacksDetails}
-                allSnacksIds={allSnacksIds}
+                recurringSnacksIds={recurringSnacksIds}
                 addSnack={this.addSnack}
                 decreaseRecurringQuantity={this.decreaseRecurringQuantity}
                 increaseRecurringQuantity={this.increaseRecurringQuantity}
