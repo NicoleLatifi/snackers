@@ -3,9 +3,9 @@ import './RecurringSnackCard.css';
 import Button from '../Button/Button'
 import QuantityButton from '../QuantityButton/QuantityButton'
 
-const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
+const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring }) => {
   const snackDetails = allSnacksDetails[snackId]
-  
+
   return (
   <>
     <h2>Snack Name</h2>
@@ -17,16 +17,17 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
     <p>{snackDetails.organic}</p>
 
     { allSnacksDetails[snackId].quantity === 0 &&
-      <Button
-        buttonText="Reactivate" 
-        snackId={snackId} 
-        addSnack={addSnack} 
-      />
-      <Button
-        buttonText="Remove" 
-        snackId={snackId} 
-        addSnack={addSnack} 
-      />
+      <>
+        <Button
+          buttonText="Reactivate" 
+          snackId={snackId} 
+        />
+        <Button
+          buttonText="Remove" 
+          snackId={snackId} 
+          removeFromRecurring={removeFromRecurring}
+        />
+      </>
     }
 
     { allSnacksDetails[snackId].quantity > 0 &&
@@ -35,6 +36,7 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
           snackId={snackId}
           buttonText="-"
           buttonType="Decrease"
+          fromRecurringPage="true"
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
         /> 
@@ -49,7 +51,6 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
         <Button
         buttonText="Pause" 
         snackId={snackId} 
-        addSnack={addSnack} 
         />
       </div>
     }
