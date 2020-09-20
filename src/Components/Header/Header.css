@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-icon {
+  height: 50px;
+  width: 50px;
+}

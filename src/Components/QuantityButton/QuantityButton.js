@@ -5,29 +5,22 @@ class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonText: ''
-    }
-  }
-
-  componentDidMount = () => {
-    if (this.props.buttonType === "Decrease") {
-      this.setState({ buttonText: "-" })
-    } else {
-      this.setState({ buttonText: "+"})
+  
     }
   }
 
   handleClick = () => {
-    if (this.props.buttonType === "Decrease") {
-      this.props.decreaseRecurringQuantity(this.props.snackId)
+    const { buttonType, snackId, fromRecurringPage, decreaseRecurringQuantity, increaseRecurringQuantity} = this.props
+    if (buttonType === "Decrease") {
+      decreaseRecurringQuantity(snackId, fromRecurringPage)
     } else {
-      this.props.increaseRecurringQuantity(this.props.snackId)
-    }
+      increaseRecurringQuantity(snackId)
+    } 
   }
 
   render() {
     return (
-      <button aria-label={`${this.props.buttonType} quantity`} onClick={this.handleClick} >{this.state.buttonText}</button>
+      <button aria-label={`${this.props.buttonType} quantity`} onClick={this.handleClick} >{this.props.buttonText}</button>
     )
   }
 }
