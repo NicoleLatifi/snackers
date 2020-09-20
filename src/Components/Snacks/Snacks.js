@@ -71,7 +71,9 @@ class Snacks extends Component {
         }
       }
     }))
-    this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
+    if (!this.state.recurringSnacksIds.includes(snackId)) {
+      this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
+    }
   }
 
   decreaseRecurringQuantity = (snackId, fromRecurringPage) => {
@@ -122,6 +124,18 @@ class Snacks extends Component {
     this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
   }
 
+  pauseRecurringSnack = (snackId) => {
+    this.setState( prevState => ({ 
+      allSnacksDetails: {
+        ...prevState.allSnacksDetails,
+        [snackId]: {
+          ...prevState.allSnacksDetails[snackId],
+          recurringStatus: "paused"
+        }
+      }
+    }))
+  }
+
   render() {
     const { allSnacksDetails, allSnacksIds, recurringSnacksIds } = this.state;
     return (
@@ -152,6 +166,7 @@ class Snacks extends Component {
                 decreaseRecurringQuantity={this.decreaseRecurringQuantity}
                 increaseRecurringQuantity={this.increaseRecurringQuantity}
                 removeFromRecurring={this.removeFromRecurring}
+                pauseRecurringSnack={this.pauseRecurringSnack}
               />
             )
           }}
