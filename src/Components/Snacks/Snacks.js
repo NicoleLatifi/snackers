@@ -98,10 +98,7 @@ class Snacks extends Component {
         }
       }))
       if (fromRecurringPage === false) {
-        let recurringSnacksIdsCopy = [...this.state.recurringSnacksIds]
-        const index = recurringSnacksIdsCopy.indexOf(snackId)
-        recurringSnacksIdsCopy.splice(index, 1)
-        this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
+        this.removeFromRecurring()
       }
     }
   }
@@ -116,6 +113,13 @@ class Snacks extends Component {
         }
       }
     }))
+  }
+
+  removeFromRecurring = (snackId) => {
+    let recurringSnacksIdsCopy = [...this.state.recurringSnacksIds]
+    const index = recurringSnacksIdsCopy.indexOf(snackId)
+    recurringSnacksIdsCopy.splice(index, 1)
+    this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
   }
 
   render() {
@@ -147,6 +151,7 @@ class Snacks extends Component {
                 addSnack={this.addSnack}
                 decreaseRecurringQuantity={this.decreaseRecurringQuantity}
                 increaseRecurringQuantity={this.increaseRecurringQuantity}
+                removeFromRecurring={this.removeFromRecurring}
               />
             )
           }}
