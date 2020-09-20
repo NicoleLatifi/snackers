@@ -30,7 +30,6 @@ describe('BrowsingSnackCard Component', () => {
       <BrowsingSnackCard
         allSnacksDetails={allSnacksDetails} 
         snackId={snackId}
-        recurringSnacks='[]'
         />
     )
 
@@ -54,7 +53,6 @@ describe('BrowsingSnackCard Component', () => {
       <BrowsingSnackCard 
         allSnacksDetails={allSnacksDetails}
         snackId={snackId}
-        recurringSnacks='[202]'
       />
     )
 
