@@ -69,8 +69,8 @@ describe('BrowsingSnackCard Component', () => {
     let quantity = await waitFor(() => screen.getByText('1'))
     const increaseButton = await waitFor(() => screen.getByRole('button', {name: 'Increase quantity'}))
     expect(decreaseButton).toBeInTheDocument
-    expect(increaseButton).toBeInTheDocument
     expect(quantity).toBeInTheDocument
+    expect(increaseButton).toBeInTheDocument
 
     fireEvent.click(increaseButton)
 
@@ -80,7 +80,7 @@ describe('BrowsingSnackCard Component', () => {
     fireEvent.click(decreaseButton)
     fireEvent.click(decreaseButton)
 
-    const addButton = await waitFor(() => screen.getByRole('button', {name: 'Add snack'}))
+    // const addButton = await waitFor(() => screen.getByRole('button', {name: 'Add snack'}))
     expect(addButton).toBeInTheDocument
   })
 })
