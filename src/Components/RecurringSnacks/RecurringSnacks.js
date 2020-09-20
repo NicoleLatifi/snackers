@@ -2,7 +2,7 @@ import React from 'react';
 import './RecurringSnacks.css';
 import RecurringSnackCard from '../RecurringSnackCard/RecurringSnackCard'
 
-const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring }) => {
+const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
   const recurringSnacksSection = recurringSnacksIds.map((snackId) => {
     return <RecurringSnackCard
       allSnacksDetails={allSnacksDetails}
@@ -11,6 +11,7 @@ const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decre
       decreaseRecurringQuantity={decreaseRecurringQuantity}
       increaseRecurringQuantity={increaseRecurringQuantity}
       removeFromRecurring={removeFromRecurring}
+      pauseRecurringSnack={pauseRecurringSnack}
       key={snackId}
     />
   })
