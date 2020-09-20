@@ -20,7 +20,7 @@ const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decre
     <>
       <h2>Recurring Snacks</h2>
       {recurringSnacksIds.length === 0 &&
-        <p>You have no recurring snacks.</p>
+        <h3>You have no recurring snacks.</h3>
       }
       <section>
         {recurringSnacksSection}
