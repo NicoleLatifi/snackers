@@ -1,9 +1,8 @@
 import React from 'react';
 import RecurringSnacks from './RecurringSnacks';
-import { screen, fireEvent, render } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { screen, render } from '@testing-library/react';
 
-describe('BrowsingSnackCard Component', () => {
+describe('RecurringSnack Component', () => {
   let allSnacksDetails
   beforeEach(() => {
     allSnacksDetails = {
