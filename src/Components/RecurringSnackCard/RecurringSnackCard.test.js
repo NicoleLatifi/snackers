@@ -1,9 +1,8 @@
 import React from 'react'
-import '@testing-library/jest-dom'
 import { screen, render, fireEvent } from '@testing-library/react'
 import RecurringSnackCard from './RecurringSnackCard'
 
-describe('BrowsingSnackCard Component', () => {
+describe('RecurringSnackCard Component', () => {
   let allSnacksDetails
   beforeEach(() => {
     allSnacksDetails = {
@@ -52,7 +51,7 @@ describe('BrowsingSnackCard Component', () => {
     expect(pauseButton).toBeInTheDocument
   })
 
-  it('Should display the correct content when rendering active snack', () => {
+  it('Should display the correct content when rendering paused snack', () => {
     const snackId = 202
 
     render (
