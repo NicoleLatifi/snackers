@@ -3,9 +3,9 @@ import './RecurringSnackCard.css';
 import Button from '../Button/Button'
 import QuantityButton from '../QuantityButton/QuantityButton'
 
-const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring }) => {
+const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
   const snackDetails = allSnacksDetails[snackId]
-
+  
   return (
   <>
     <h2>Snack Name</h2>
@@ -16,11 +16,12 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
     <p>{snackDetails.allergens}</p>
     <p>{snackDetails.organic}</p>
 
-    { allSnacksDetails[snackId].quantity === 0 &&
+    { allSnacksDetails[snackId].recurringStatus !== "active" &&
       <>
         <Button
           buttonText="Reactivate" 
-          snackId={snackId} 
+          snackId={snackId}
+          addSnack={addSnack}
         />
         <Button
           buttonText="Remove" 
@@ -30,7 +31,7 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
       </>
     }
 
-    { allSnacksDetails[snackId].quantity > 0 &&
+    { allSnacksDetails[snackId].recurringStatus === "active" &&
       <div className="quantity-buttons-container">
         <QuantityButton
           snackId={snackId}
@@ -50,7 +51,8 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
         /> 
         <Button
         buttonText="Pause" 
-        snackId={snackId} 
+        snackId={snackId}
+        pauseRecurringSnack={pauseRecurringSnack}
         />
       </div>
     }
@@ -59,3 +61,45 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
 }
 
 export default RecurringSnackCard;
+
+
+// { allSnacksDetails[snackId].quantity === 0 &&
+//   <>
+//     <Button
+//       buttonText="Reactivate" 
+//       snackId={snackId}
+//       addSnack={addSnack}
+//     />
+//     <Button
+//       buttonText="Remove" 
+//       snackId={snackId} 
+//       removeFromRecurring={removeFromRecurring}
+//     />
+//   </>
+// }
+
+// { allSnacksDetails[snackId].quantity > 0 &&
+//   <div className="quantity-buttons-container">
+//     <QuantityButton
+//       snackId={snackId}
+//       buttonText="-"
+//       buttonType="Decrease"
+//       fromRecurringPage="true"
+//       decreaseRecurringQuantity={decreaseRecurringQuantity}
+//       increaseRecurringQuantity={increaseRecurringQuantity}
+//     /> 
+//     <span>{allSnacksDetails[snackId].quantity}</span>
+//     <QuantityButton
+//       snackId={snackId}
+//       buttonText="+"
+//       buttonType="Increase"
+//       decreaseRecurringQuantity={decreaseRecurringQuantity}
+//       increaseRecurringQuantity={increaseRecurringQuantity}
+//     /> 
+//     <Button
+//     buttonText="Pause" 
+//     snackId={snackId}
+//     pauseRecurringSnack={pauseRecurringSnack}
+//     />
+//   </div>
+// }
