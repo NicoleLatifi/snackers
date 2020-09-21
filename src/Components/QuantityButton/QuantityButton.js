@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './QuantityButton.css';
 
-class Button extends Component {
+class QuantityButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,4 +25,4 @@ class Button extends Component {
   }
 }
 
-export default Button;
+export default QuantityButton;
