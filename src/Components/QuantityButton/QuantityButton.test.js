@@ -1,6 +1,7 @@
 import React from 'react';
 import QuantityButton from './QuantityButton';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 describe('QuantityButton', () => {
   it('Should display the correct text', () => {
@@ -10,8 +11,8 @@ describe('QuantityButton', () => {
       />
     )
     
-    const decreaseButtonText = screen.getByText('-')
-    expect(decreaseButtonText).toBeInTheDocument
+    const decreaseButton = screen.getByText('-')
+    expect(decreaseButton).toBeInTheDocument
 
     render (
       <QuantityButton
@@ -19,8 +20,30 @@ describe('QuantityButton', () => {
       />
     )
 
-    const increaseButtonText = screen.getByText('+')
-    expect(increaseButtonText).toBeInTheDocument
+    const increaseButton = screen.getByText('+')
+    expect(increaseButton).toBeInTheDocument
   })
 
+  it('Should fire the correct method when decrease button clicked', () => {
+    const mockDecreaseRecurringQuantity = jest.fn()
+    // const mockIncreaseRecurringQuantity = jest.fn()
+
+    render (
+      <QuantityButton
+        buttonText="-"
+        buttonType="Decrease"
+        decreaseRecurringQuantity={mockDecreaseRecurringQuantity}
+        increaseRecurringQuantity={mockIncreaseRecurringQuantity}
+
+      />
+    )
+    
+    const decreaseButton = screen.getByText('-')
+    fireEvent.click(decreaseButton)
+    expect(mockDecreaseRecurringQuantity).toHaveBeenCalledTimes(1)
+  
+    // const increaseButton = screen.getByText('-')
+    // fireEvent.click(increaseButton)
+    // expect(mockIncreaseRecurringQuantity).toHaveBeenCalledTimes(1)
+  })
 })
