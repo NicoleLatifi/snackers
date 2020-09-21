@@ -1,0 +1,40 @@
+.recurring-snack-card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 5px 0px 15px 0px #0F1626;
+  margin: 10px;
+  height: 400px;
+  min-width: 200px;
+  max-width: 200px;
+  position: relative;
+}
+
+.recurring-snack-image {
+  margin: 10px 50px 10px 50px;
+  width: 100px;
+}
+
+.recurring-text {
+  border-bottom: 1px solid #44706a;
+  border-top: 1px solid #44706a;
+  height: 140px;
+  margin: 0px 20px 0px 20px;
+  padding: 5px 0px 5px 0px;
+  position: relative;
+}
+
+.recurring-price {
+  position: absolute;
+  bottom: 5px;
+}
+
+.recurring-buttons-container {
+  margin-left: 45px;
+  margin-right: 45px;
+  position: absolute;
+  bottom: 20px;
+}
+
+.top-button {
+  margin-bottom: 10px;
+}

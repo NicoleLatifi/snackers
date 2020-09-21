@@ -7,14 +7,17 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
   const snackDetails = allSnacksDetails[snackId]
   
   return (
-  <>
-    <img className='snack-image' src={snackDetails.image} alt={snackDetails.name} />
-    <h2>{snackDetails.name}</h2>
-    <p>{snackDetails.brand}</p>
-    <p>${snackDetails.price} / {snackDetails.sizeValue} {snackDetails.sizeUnit}</p>
+  <div className="snack-card">
+    <img className="snack-image" src={snackDetails.image} alt={snackDetails.name} />
+    <div className="snack-text">
+      <h2 className="snack-name">{snackDetails.name}</h2>
+      <p>{snackDetails.brand}</p>
+      <p className="snack-price">${snackDetails.price} / {snackDetails.sizeValue} {snackDetails.sizeUnit}</p>
+    </div>
 
     { allSnacksDetails[snackId].quantity === 0 &&
       <Button
+        className="button"
         buttonText="Add" 
         snackId={snackId} 
         addSnack={addSnack} 
@@ -30,7 +33,7 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
           decreaseRecurringQuantity={decreaseRecurringQuantity}
           increaseRecurringQuantity={increaseRecurringQuantity}
         /> 
-        <span>{allSnacksDetails[snackId].quantity}</span>
+        <div className="quantity">{allSnacksDetails[snackId].quantity}</div>
         <QuantityButton
           snackId={snackId}
           buttonText="+"
@@ -40,7 +43,7 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
         /> 
       </div>
     }
-  </>  
+  </div>  
   );
 }
 

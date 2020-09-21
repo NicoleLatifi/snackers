@@ -1,0 +1,10 @@
+.recurring-snacks-container {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+}
+
+.space {
+  display: inline-block;
+  width: 20px;
+}

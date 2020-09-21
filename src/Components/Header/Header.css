@@ -3,7 +3,22 @@
   justify-content: space-between;
 }
 
+.snackers {
+  color: #0F1626;
+  font-family: 'Fahkwang', sans-serif;
+  font-weight: 200;
+  font-size: 128px;
+  line-height: 128px;
+  margin-left: 0;
+  padding-bottom: 10px;
+}
+
 .calendar-icon {
-  height: 50px;
-  width: 50px;
+  height: 100px;
+  filter: invert(1);
+  width: 100px;
+}
+
+.calendar-icon:hover {
+  transform: scale(1.1);
 }

@@ -20,7 +20,7 @@ class QuantityButton extends Component {
 
   render() {
     return (
-      <button aria-label={`${this.props.buttonType} quantity`} onClick={this.handleClick} >{this.props.buttonText}</button>
+      <button className="quantity-button" aria-label={`${this.props.buttonType} quantity`} onClick={this.handleClick} >{this.props.buttonText}</button>
     )
   }
 }

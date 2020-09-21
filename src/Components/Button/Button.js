@@ -23,7 +23,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button aria-label={`${this.props.buttonText} snack`} onClick={this.handleClick} >{this.props.buttonText}</button>
+      <button className="standard-button" aria-label={`${this.props.buttonText} snack`} onClick={this.handleClick} >{this.props.buttonText}</button>
     )
   }
 }

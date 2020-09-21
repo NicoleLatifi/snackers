@@ -1,0 +1,17 @@
+.quantity-button {
+  border:1px solid #ffffff;
+  border-radius: 1em;
+  font-weight: 300;
+  font-size: 18px;
+  color: #FFFFFF;
+  background-color: #e4685d;
+  text-align: center;
+  transition: all 0.2s;
+  height: 40px;
+  width: 40px;
+}
+
+.quantity-button:hover{
+	background: linear-gradient(to bottom, #f0857f 5%, #e4685d 100%);
+	background-color: #f0857f;
+}
