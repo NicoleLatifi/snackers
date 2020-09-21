@@ -10,7 +10,7 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
   <div className="snack-card">
     <img className="snack-image" src={snackDetails.image} alt={snackDetails.name} />
     <div className="snack-text">
-      <h2>{snackDetails.name}</h2>
+      <h2 className="snack-name">{snackDetails.name}</h2>
       <p>{snackDetails.brand}</p>
       <p className="snack-price">${snackDetails.price} / {snackDetails.sizeValue} {snackDetails.sizeUnit}</p>
     </div>
