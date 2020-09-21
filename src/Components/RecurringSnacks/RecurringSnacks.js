@@ -2,7 +2,7 @@ import React from 'react';
 import './RecurringSnacks.css';
 import RecurringSnackCard from '../RecurringSnackCard/RecurringSnackCard'
 
-const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
+const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, totalPrice, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
   const recurringSnacksSection = recurringSnacksIds.map((snackId) => {
     return <RecurringSnackCard
       allSnacksDetails={allSnacksDetails}
@@ -18,7 +18,7 @@ const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decre
 
   return (
     <>
-      <h2 className="header-text">Recurring Snacks</h2>
+      <h2 className="header-text">Recurring Snacks<span className="space"></span>|<span className="space"></span>Total: ${totalPrice}</h2>
       {recurringSnacksIds.length === 0 &&
         <h3>You have no recurring snacks.</h3>
       }
