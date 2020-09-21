@@ -1,0 +1,5 @@
+.recurring-snacks-container {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+}
