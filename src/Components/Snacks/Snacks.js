@@ -14,6 +14,7 @@ class Snacks extends Component {
       allSnacksIds: [],
       recurringSnacksIds: [],
       error: '',
+      totalPrice: 0,
     }
   }
 
@@ -60,6 +61,12 @@ class Snacks extends Component {
     })
   }
 
+  // componentDidUpdate(prevState) {
+  //   if(this.state.allSnacksDetails !== prevState.allSnacksDetails) {
+  //     this.calculateTotalPrice()
+  //   }
+  // }
+
   addSnack = (snackId) => {
     this.setState( prevState => ({ 
       allSnacksDetails: {
@@ -73,7 +80,10 @@ class Snacks extends Component {
     }))
     if (!this.state.recurringSnacksIds.includes(snackId)) {
       this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
+      console.log('recurringSnacksIds updated!')
     }
+    console.log(this.state.recurringSnacksIds)
+    this.calculateTotalPrice()
   }
 
   decreaseRecurringQuantity = (snackId, fromRecurringPage) => {
@@ -103,6 +113,7 @@ class Snacks extends Component {
         this.removeFromRecurring()
       }
     }
+    this.calculateTotalPrice()
   }
 
   increaseRecurringQuantity = (snackId) => {
@@ -115,6 +126,7 @@ class Snacks extends Component {
         }
       }
     }))
+    this.calculateTotalPrice()
   }
 
   removeFromRecurring = (snackId) => {
@@ -122,6 +134,7 @@ class Snacks extends Component {
     const index = recurringSnacksIdsCopy.indexOf(snackId)
     recurringSnacksIdsCopy.splice(index, 1)
     this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
+    this.calculateTotalPrice()
   }
 
   pauseRecurringSnack = (snackId) => {
@@ -136,8 +149,20 @@ class Snacks extends Component {
     }))
   }
 
+  calculateTotalPrice = () => {
+    console.log(this.state.recurringSnacksIds)
+    const newTotalPrice = this.state.recurringSnacksIds.reduce((total, recurringSnackId) => {
+      const recurringSnacksDetails = this.state.allSnacksDetails[recurringSnackId]
+      total = total + (recurringSnacksDetails.price * recurringSnacksDetails.quantity)
+      console.log(`total: ${total}`)
+      // total.toFixed(2)
+      return total.toFixed(2)
+    }, 0)
+    this.setState({ totalPrice: newTotalPrice })
+  }
+
   render() {
-    const { allSnacksDetails, allSnacksIds, recurringSnacksIds } = this.state;
+    const { allSnacksDetails, allSnacksIds, recurringSnacksIds, totalPrice } = this.state;
     return (
       <Switch>
         <Route 
@@ -162,6 +187,7 @@ class Snacks extends Component {
               <RecurringSnacks
                 allSnacksDetails={allSnacksDetails}
                 recurringSnacksIds={recurringSnacksIds}
+                totalPrice={totalPrice}
                 addSnack={this.addSnack}
                 decreaseRecurringQuantity={this.decreaseRecurringQuantity}
                 increaseRecurringQuantity={this.increaseRecurringQuantity}
