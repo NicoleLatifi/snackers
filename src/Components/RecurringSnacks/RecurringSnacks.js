@@ -18,11 +18,11 @@ const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, addSnack, decre
 
   return (
     <>
-      <h2>Recurring Snacks</h2>
+      <h2 className="header-text">Recurring Snacks</h2>
       {recurringSnacksIds.length === 0 &&
         <h3>You have no recurring snacks.</h3>
       }
-      <section>
+      <section className="recurring-snacks-container">
         {recurringSnacksSection}
       </section>
     </>
