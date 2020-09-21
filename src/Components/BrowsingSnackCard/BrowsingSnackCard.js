@@ -8,13 +8,10 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
   
   return (
   <>
-    <h2>Snack Name</h2>
     <img className='snack-image' src={snackDetails.image} alt={snackDetails.name} />
-    <p>{snackDetails.name}</p>
+    <h2>{snackDetails.name}</h2>
     <p>{snackDetails.brand}</p>
     <p>${snackDetails.price} / {snackDetails.sizeValue} {snackDetails.sizeUnit}</p>
-    <p>{snackDetails.allergens}</p>
-    <p>{snackDetails.organic}</p>
 
     { allSnacksDetails[snackId].quantity === 0 &&
       <Button
