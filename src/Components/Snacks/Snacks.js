@@ -15,7 +15,7 @@ class Snacks extends Component {
       allSnacksIds: [],
       recurringSnacksIds: [],
       error: "",
-      totalPrice: 0,
+      totalPrice: "",
     }
   }
 
