@@ -1,8 +1,8 @@
 import React from 'react';
 import BrowseSnacks from './BrowseSnacks';
-import { screen, fireEvent, render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 
-describe('Browse Component', () => {
+describe('BrowseSnacks Component', () => {
   let allSnacksDetails
   beforeEach(() => {
     allSnacksDetails = {
