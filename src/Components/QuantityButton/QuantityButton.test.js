@@ -1,7 +1,7 @@
-import React from 'react';
-import QuantityButton from './QuantityButton';
-import { screen, render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import React from 'react'
+import QuantityButton from './QuantityButton'
+import { screen, render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 describe('QuantityButton', () => {
   it('Should display the correct text', () => {
