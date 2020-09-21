@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Fahkwang';
+  src: local('Fahkwang'), url(./Helpers/Fahkwang/Fahkwang-ExtraLight.ttf) format('truetype');
+}
