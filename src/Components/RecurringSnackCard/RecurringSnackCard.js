@@ -2,6 +2,7 @@ import React from 'react';
 import './RecurringSnackCard.css';
 import Button from '../Button/Button'
 import QuantityButton from '../QuantityButton/QuantityButton'
+import PropTypes from 'prop-types';
 
 const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
   const snackDetails = allSnacksDetails[snackId]
@@ -65,4 +66,14 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
   );
 }
 
-export default RecurringSnackCard;
+export default RecurringSnackCard
+
+RecurringSnackCard.propTypes = {
+  allSnacksDetails: PropTypes.object,
+  snackId: PropTypes.number,
+  addSnack: PropTypes.func,
+  decreaseRecurringQuantity: PropTypes.func,
+  increaseRecurringQuantity: PropTypes.func,
+  removeFromRecurring: PropTypes.func,
+  pauseRecurringSnack: PropTypes.func,
+}

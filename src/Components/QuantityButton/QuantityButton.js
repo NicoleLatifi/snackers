@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './QuantityButton.css';
+import PropTypes from 'prop-types';
 
 class QuantityButton extends Component {
   constructor(props) {
@@ -25,4 +26,11 @@ class QuantityButton extends Component {
   }
 }
 
-export default QuantityButton;
+export default QuantityButton
+
+QuantityButton.propTypes = {
+  buttonText: PropTypes.string,
+  buttonType: PropTypes.string,
+  decreaseRecurringQuantity: PropTypes.func,
+  increaseRecurringQuantity: PropTypes.func,
+}

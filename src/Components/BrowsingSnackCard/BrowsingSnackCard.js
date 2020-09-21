@@ -2,6 +2,7 @@ import React from 'react';
 import './BrowsingSnackCard.css';
 import Button from '../Button/Button'
 import QuantityButton from '../QuantityButton/QuantityButton'
+import PropTypes from 'prop-types';
 
 const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
   const snackDetails = allSnacksDetails[snackId]
@@ -48,3 +49,11 @@ const BrowsingSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecurr
 }
 
 export default BrowsingSnackCard;
+
+BrowsingSnackCard.propTypes = {
+  allSnacksDetails: PropTypes.object,
+  snackId: PropTypes.number,
+  addSnack: PropTypes.func,
+  decreaseRecurringQuantity: PropTypes.func,
+  increaseRecurringQuantity: PropTypes.func,
+}
