@@ -57,8 +57,6 @@ describe('QuantityButton', () => {
     expect(mockAddSnack).toHaveBeenCalledTimes(1)
 
 
-    const mockAddSnack = jest.fn()
-
     render (
       <Button
         buttonText="Reactivate"
@@ -68,7 +66,7 @@ describe('QuantityButton', () => {
 
     const reactivateButton = screen.getByText('Reactivate')
     fireEvent.click(reactivateButton)
-    expect(mockAddSnack).toHaveBeenCalledTimes(1)
+    expect(mockAddSnack).toHaveBeenCalledTimes(2)
 
 
     const mockRemoveFromRecurring = jest.fn()
