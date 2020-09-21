@@ -1,6 +1,7 @@
 import React from 'react';
 import './BrowseSnacks.css';
 import BrowsingSnackCard from '../BrowsingSnackCard/BrowsingSnackCard'
+import PropTypes from 'prop-types';
 
 const BrowseSnacks = ({ allSnacksDetails, allSnacksIds, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity }) => {
   const browsingSnacksCards =
@@ -29,3 +30,11 @@ const BrowseSnacks = ({ allSnacksDetails, allSnacksIds, addSnack, decreaseRecurr
 }
 
 export default BrowseSnacks;
+
+BrowseSnacks.propTypes = {
+  allSnacksDetails: PropTypes.object,
+  allSnacksIds: PropTypes.array,
+  addSnack: PropTypes.func,
+  decreaseRecurringQuantity: PropTypes.func,
+  increaseRecurringQuantity: PropTypes.func,
+}

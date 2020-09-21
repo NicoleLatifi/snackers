@@ -155,7 +155,6 @@ class Snacks extends Component {
       const recurringSnacksDetails = this.state.allSnacksDetails[recurringSnackId]
       total = total + (recurringSnacksDetails.price * recurringSnacksDetails.quantity)
       console.log(`total: ${total}`)
-      // total.toFixed(2)
       return total.toFixed(2)
     }, 0)
     this.setState({ totalPrice: newTotalPrice })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Button.css';
+import PropTypes from 'prop-types';
 
 class Button extends Component {
   constructor(props) {
@@ -29,3 +30,11 @@ class Button extends Component {
 }
 
 export default Button;
+
+Button.propTypes = {
+  buttonText: PropTypes.string,
+  buttonType: PropTypes.string,
+  addSnack: PropTypes.func,
+  removeFromRecurring: PropTypes.func,
+  pauseRecurringSnack: PropTypes.func,
+}

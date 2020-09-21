@@ -1,6 +1,7 @@
 import React from 'react';
 import './RecurringSnacks.css';
 import RecurringSnackCard from '../RecurringSnackCard/RecurringSnackCard'
+import PropTypes from 'prop-types';
 
 const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, totalPrice, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
   const recurringSnacksSection = recurringSnacksIds.map((snackId) => {
@@ -29,4 +30,15 @@ const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, totalPrice, add
   )
 }
 
-export default RecurringSnacks;
+export default RecurringSnacks
+
+RecurringSnacks.propTypes = {
+  allSnacksDetails: PropTypes.object,
+  recurringSnacksIds: PropTypes.array,
+  totalPrice: PropTypes.number,
+  addSnack: PropTypes.func,
+  decreaseRecurringQuantity: PropTypes.func,
+  increaseRecurringQuantity: PropTypes.func,
+  removeFromRecurring: PropTypes.func,
+  pauseRecurringSnack: PropTypes.func,
+}
