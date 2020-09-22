@@ -35,7 +35,7 @@ export default RecurringSnacks
 RecurringSnacks.propTypes = {
   allSnacksDetails: PropTypes.object,
   recurringSnacksIds: PropTypes.array,
-  totalPrice: PropTypes.number,
+  totalPrice: PropTypes.string,
   addSnack: PropTypes.func,
   decreaseRecurringQuantity: PropTypes.func,
   increaseRecurringQuantity: PropTypes.func,

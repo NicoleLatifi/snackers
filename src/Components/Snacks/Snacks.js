@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './Snacks.css';
 import BrowseSnacks from '../BrowseSnacks/BrowseSnacks'
 import RecurringSnacks from '../RecurringSnacks/RecurringSnacks'
+import Error from '../Error/Error'
 import { getAllSnacksIds, getSnackDetail, getSnackPrice } from '../../Helpers/apiCalls'
 import noImage from "../../Helpers/icons/snack.png"
-import { Route, Switch } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 class Snacks extends Component {
   constructor() {
@@ -13,62 +14,74 @@ class Snacks extends Component {
       allSnacksDetails: {},
       allSnacksIds: [],
       recurringSnacksIds: [],
-      error: '',
-      totalPrice: 0,
+      error: "",
+      totalPrice: "",
     }
   }
 
   async componentDidMount() {
     await getAllSnacksIds()
-      .then(randomSnackIds => {
-        this.setState({ allSnacksIds: randomSnackIds})
-    })
+      .then(data => {
+        if (data.hasOwnProperty("error")) {
+          throw new Error(data.error);
+        } else {
+          this.setState({ allSnacksIds: data})
+        }
+      })
+      .catch(async (error) => {await this.setState({ error: error })})
+
     this.state.allSnacksIds.forEach(async (snackId) => {
       await getSnackDetail(snackId)  
-        .then(snackDetail => {
-          this.setState( prevState => ({ 
-            allSnacksDetails: {
-              ...prevState.allSnacksDetails,
-              [snackId]: {
-                name: snackDetail.name,
-                brand: snackDetail.brand,
-                sizeValue: snackDetail.sizeValue,
-                sizeUnit: snackDetail.sizeUnit,
-                allergens: snackDetail.allergens,
-                ingredients: snackDetail.ingredients,
-                organic: snackDetail.organic,
-                image: snackDetail.image ? snackDetail.image : noImage,
-                recurringStatus: "not added",
-                quantity: 0
-            }
+        .then(data => {
+          if (data.hasOwnProperty("error")) {
+            throw new Error(data.error)
+          } else {
+            this.setState( prevState => ({ 
+              allSnacksDetails: {
+                ...prevState.allSnacksDetails,
+                [snackId]: {
+                  name: data.name,
+                  brand: data.brand,
+                  sizeValue: data.sizeValue,
+                  sizeUnit: data.sizeUnit,
+                  allergens: data.allergens,
+                  ingredients: data.ingredients,
+                  organic: data.organic,
+                  image: data.image ? data.image : noImage,
+                  recurringStatus: "not added",
+                  quantity: 0
+                }
+              }
+            }))
           }
-        }))
-      })
+        })
+        .catch(async (error) => {await this.setState({ error: error })})
     })
+
     this.state.allSnacksIds.forEach(async (snackId) => {
       await getSnackPrice(snackId)
-        .then(snackPrice => {
-          this.setState( prevState => ({ 
-            allSnacksDetails: {
-              ...prevState.allSnacksDetails,
-              [snackId]: {
-                ...prevState.allSnacksDetails[snackId],
-                price: snackPrice
+        .then(data => {
+          if (data.hasOwnProperty("error")) {
+            throw new Error(data.error)
+
+          } else {
+            this.setState( prevState => ({ 
+              allSnacksDetails: {
+                ...prevState.allSnacksDetails,
+                [snackId]: {
+                  ...prevState.allSnacksDetails[snackId],
+                  price: data.toFixed(2)
+                }
               }
-            }
-          }))
-      })
+            }))
+          }
+        })
+        .catch(async (error) => {await this.setState({ error: error })})
     })
   }
 
-  // componentDidUpdate(prevState) {
-  //   if(this.state.allSnacksDetails !== prevState.allSnacksDetails) {
-  //     this.calculateTotalPrice()
-  //   }
-  // }
-
-  addSnack = (snackId) => {
-    this.setState( prevState => ({ 
+  addSnack = async (snackId) => {
+    await this.setState( prevState => ({ 
       allSnacksDetails: {
         ...prevState.allSnacksDetails,
         [snackId]: {
@@ -79,16 +92,14 @@ class Snacks extends Component {
       }
     }))
     if (!this.state.recurringSnacksIds.includes(snackId)) {
-      this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
-      console.log('recurringSnacksIds updated!')
+      await this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
     }
-    console.log(this.state.recurringSnacksIds)
     this.calculateTotalPrice()
   }
 
-  decreaseRecurringQuantity = (snackId, fromRecurringPage) => {
+  decreaseRecurringQuantity = async (snackId, fromRecurringPage) => {
     if (this.state.allSnacksDetails[snackId].quantity > 1) {
-      this.setState( prevState => ({
+      await this.setState( prevState => ({
         allSnacksDetails: {
           ...prevState.allSnacksDetails,
           [snackId]: {
@@ -97,9 +108,8 @@ class Snacks extends Component {
           }
         }
       }))
-    }
-    if (this.state.allSnacksDetails[snackId].quantity === 1) {
-      this.setState( prevState => ({
+    } else if (this.state.allSnacksDetails[snackId].quantity === 1) {
+      await this.setState( prevState => ({
         allSnacksDetails: {
           ...prevState.allSnacksDetails,
           [snackId]: {
@@ -116,8 +126,8 @@ class Snacks extends Component {
     this.calculateTotalPrice()
   }
 
-  increaseRecurringQuantity = (snackId) => {
-    this.setState( prevState => ({
+  increaseRecurringQuantity = async (snackId) => {
+    await this.setState( prevState => ({
       allSnacksDetails: {
         ...prevState.allSnacksDetails,
         [snackId]: {
@@ -150,52 +160,44 @@ class Snacks extends Component {
   }
 
   calculateTotalPrice = () => {
-    console.log(this.state.recurringSnacksIds)
     const newTotalPrice = this.state.recurringSnacksIds.reduce((total, recurringSnackId) => {
       const recurringSnacksDetails = this.state.allSnacksDetails[recurringSnackId]
-      total = total + (recurringSnacksDetails.price * recurringSnacksDetails.quantity)
-      console.log(`total: ${total}`)
+      const recurringSnackPrice = recurringSnacksDetails.price * recurringSnacksDetails.quantity
+      total = parseFloat(total) + parseFloat(recurringSnackPrice)
       return total.toFixed(2)
     }, 0)
     this.setState({ totalPrice: newTotalPrice })
   }
 
   render() {
-    const { allSnacksDetails, allSnacksIds, recurringSnacksIds, totalPrice } = this.state;
+    const { allSnacksDetails, allSnacksIds, recurringSnacksIds, totalPrice, error } = this.state;
     return (
       <Switch>
-        <Route 
-          exact
-          path='/'
-          render={() => {
-            return (            
-              <BrowseSnacks
-              allSnacksDetails={allSnacksDetails}
-              allSnacksIds={allSnacksIds}
-              addSnack={this.addSnack}
-              decreaseRecurringQuantity={this.decreaseRecurringQuantity}
-              increaseRecurringQuantity={this.increaseRecurringQuantity}
-              />
-            )
-          }}
-        />
-        <Route
-          path='/recurring-snacks'
-          render={() => {
-            return (
-              <RecurringSnacks
-                allSnacksDetails={allSnacksDetails}
-                recurringSnacksIds={recurringSnacksIds}
-                totalPrice={totalPrice}
-                addSnack={this.addSnack}
-                decreaseRecurringQuantity={this.decreaseRecurringQuantity}
-                increaseRecurringQuantity={this.increaseRecurringQuantity}
-                removeFromRecurring={this.removeFromRecurring}
-                pauseRecurringSnack={this.pauseRecurringSnack}
-              />
-            )
-          }}
-        />
+        <Route exact path='/'>
+          {error ? <Redirect to="/error" /> : 
+          <BrowseSnacks
+          allSnacksDetails={allSnacksDetails}
+          allSnacksIds={allSnacksIds}
+          addSnack={this.addSnack}
+          decreaseRecurringQuantity={this.decreaseRecurringQuantity}
+          increaseRecurringQuantity={this.increaseRecurringQuantity}
+          />}
+        </Route>
+        <Route path='/recurring-snacks'>
+          <RecurringSnacks
+          allSnacksDetails={allSnacksDetails}
+          recurringSnacksIds={recurringSnacksIds}
+          totalPrice={totalPrice}
+          addSnack={this.addSnack}
+          decreaseRecurringQuantity={this.decreaseRecurringQuantity}
+          increaseRecurringQuantity={this.increaseRecurringQuantity}
+          removeFromRecurring={this.removeFromRecurring}
+          pauseRecurringSnack={this.pauseRecurringSnack}
+          />
+        </Route>
+        <Route path='/error'>
+          <Error />
+        </Route>
       </Switch>
     )
   }
