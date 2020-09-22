@@ -8,7 +8,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { getAllSnacksIds, getSnackDetail, getSnackPrice } from '../../Helpers/apiCalls';
 jest.mock('../../Helpers/apiCalls')
 
-describe('BrowsingSnackCard Component', () => {
+describe('Snacks Component', () => {
   let allSnacksDetails, allSnacksIds
   beforeEach(() => {
     allSnacksDetails = { 101: {} },
@@ -34,7 +34,7 @@ describe('BrowsingSnackCard Component', () => {
     )
 
     const name = await waitFor(() => screen.getByText('Chips'))
-    const price = await waitFor(() => screen.getByText('$1 / 10 OZ'))
+    const price = await waitFor(() => screen.getByText('$1.00 / 10 OZ', { exact: false}))
     const addButton = screen.getByRole('button', {name: 'Add snack'})
 
     expect(name).toBeInTheDocument
@@ -80,7 +80,47 @@ describe('BrowsingSnackCard Component', () => {
     fireEvent.click(decreaseButton)
     fireEvent.click(decreaseButton)
 
-    // const addButton = await waitFor(() => screen.getByRole('button', {name: 'Add snack'}))
     expect(addButton).toBeInTheDocument
+  })
+
+  it('Should render error message when network request returns error', async () => {
+    const data = {error: ""}
+    
+    getAllSnacksIds.mockResolvedValue(data)
+  
+    render (
+      <MemoryRouter>
+        <Snacks />
+      </MemoryRouter>
+    )
+
+    const errorHeader = await waitFor(() => screen.getByRole('heading', { name: 'Error:'}))
+    const errorMessage = await waitFor(() => screen.getByRole('heading', { name: 'Sorry! Unable to get snacks. Please try again.'}))
+  
+    expect(errorHeader).toBeInTheDocument()
+    expect(errorMessage).toBeInTheDocument()
+  })
+
+  it('Should display the snack icon when network request doesn\'t provide image', async () => {
+    getAllSnacksIds.mockResolvedValue(allSnacksIds)
+
+    getSnackDetail.mockResolvedValue({
+      name: "Chips",
+      sizeValue: 10,
+      sizeUnit: "OZ",
+      image: "",
+    })
+
+    getSnackPrice.mockResolvedValue(1)
+  
+    render (
+      <MemoryRouter>
+        <Snacks />
+      </MemoryRouter>
+    )
+
+    const snackIcon = await waitFor(() => screen.getByRole('img', { name: 'Chips' }))
+
+    expect(snackIcon).toBeInTheDocument()
   })
 })
