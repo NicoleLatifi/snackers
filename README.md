@@ -1,8 +1,9 @@
 # snackers
 #### Mod-3 Solo Project by [Nicole Latifi](GitHub.com/NicoleLatifi)
 
+Get recurring snacks with this easy to manage subscription application. Add, adjust, pause, reactivate, or remove snacks. Perfect for office managers that want happy not hangry coworkers!
 
-### View the app in action!
+### View the app in action:
 
 The user can browse snacks, add them to their Recurring Snacks, and adjust the quantity.
 
