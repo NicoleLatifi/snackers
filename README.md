@@ -4,7 +4,11 @@
 
 ### View the app in action!
 
-<img src="http://g.recordit.co/KyYp4OmHSc.gif" alt="Login as manager and dashboard is displayed" height=auto width=75%/>
+The user can browse snacks, add them to their Recurring Snacks, and adjust the quantity.
+
+<img src="http://g.recordit.co/KyYp4OmHSc.gif" alt="Browse snacks, add, and adjust quantity" height=auto width=75%/>
+
+Once a user has added snacks, they can view their Recurring Snacks. These recurring snacks can be have their quantity adjusted, be paused and then reactivated, or paused and then removed.
 
 <img src="http://g.recordit.co/rDY0ST5Kgx.gif" alt="Login as customer and dashboard is displayed" height=auto width=75%/>
 
@@ -18,9 +22,15 @@
 
 ### Wins
 
+* Used React to keep UI in sync with state
+* Wrote thorough testing suite covering unit, integration, and asynchronous tests
+* Created Button and QuantityButton components to dynamically render different buttons
 
 ### Challenges
 
+* Cleaning up data and accounting for unexpected data returned from network requests
+* Keeping code DRY
 
 ### Future Extensions
 
+* Add sections for upcoming weeks so that a user can adjust their recurring snacks for a specific upcoming week.
