@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-  - "node"
+- node
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: E5edJ0u0Jttbx71XapOcpC7jI/Xgyhil9uZtIQKuY++TT5MmPT6+xJvvJVMpbX79RE1l9PGDazPh1/hDoSYMwgTtJatgvhEzgyu6+M6HV44Ikzpbwq4uMZ6+pPJgjbv5ssMIhKAhPRLMNHE7QkHARfoPC20mkyGS+uWzU9DTTcXuq+AZ4+I+tNOThI/JiedA8lK0bdFLKWjw39Z92sW9ol7UFjAJM5TWEsjlkICUzn3lce6hm/ohPIsL5ZdXs52c7lGzcFbHH4xc363HlqWzq4QFxCh9Qno7MkRjQ3msc/7FV2Jg7uKZLG4OeYojZ33I9h3jVh3YJbS6xRU+Bm9fqgkoL8g7k88ZBFNCkTE1d4+NzHRR8wnib39rcMGv1Jb54hepoEGLqYkEP9JpdfzdNtyI8TzX47rS9nK5zMMyXSySkDjZbOv/Tc94GZuIPQv2G8GbjteoSa7x7uC6SK2LFyntLYZMXHaosTR6OkqWy5yrZmARjfhnt5ZwacPQVB/w0OaT5htkvzseZIm3iu6zXSMMOf6+rjmr8KVZwv1VTSiZcHVbCJTqUJedgbKxDGJ2aDf0lqXRYlNMzrDFHFEyEFxqSzNqtQunD0RCl1tXY0izCNDc4iDF1aU1AVYhjF2MywQhgByM3UZ4vxvre3qjQpDzXAtmYXPksOafdO5njFk=
+  app: nl-snackers
+  skip_cleaning: true
