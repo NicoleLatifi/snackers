@@ -32,6 +32,10 @@ Once a user has added snacks, they can view their Recurring Snacks. These recurr
 * Cleaning up data and accounting for unexpected data returned from network requests
 * Keeping code DRY
 
+### Technology Used
+
+* React / Redux
+
 ### Future Extensions
 
 * Add sections for upcoming weeks so that a user can adjust their recurring snacks for a specific upcoming week.
