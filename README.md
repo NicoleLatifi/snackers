@@ -35,6 +35,7 @@ Once a user has added snacks, they can view their Recurring Snacks. These recurr
 ### Technology Used
 
 * React / Redux
+* React Testing Library
 
 ### Future Extensions
 
