@@ -40,3 +40,5 @@ Once a user has added snacks, they can view their Recurring Snacks. These recurr
 ### Future Extensions
 
 * Add sections for upcoming weeks so that a user can adjust their recurring snacks for a specific upcoming week.
+* React Hooks
+* TypeScript
