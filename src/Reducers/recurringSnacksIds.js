@@ -1,9 +1,11 @@
 export const recurringSnacksIds = (state = [], action) => {
   switch(action.type) {
-      case 'ADD_SNACK':
-          const newState = [...state, ...action.recurringSnacksIds]
-          return newState
+      case 'ADD_RECURRING_ID':
+
+        console.log(state)
+
+        return ( [...state, action.snackId] )
       default: 
-          return state
+        return state
   }
 }
