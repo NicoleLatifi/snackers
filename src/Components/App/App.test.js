@@ -15,7 +15,7 @@ describe('App Component', () => {
     allSnacksIds = [101]
   })
   
-  it('Should allow user to add recurring snack and then view it on Recurring Snacks page', async () => {
+  it.skip('Should allow user to add recurring snack and then view it on Recurring Snacks page', async () => {
     getAllSnacksIds.mockResolvedValue(allSnacksIds)
 
     getSnackDetail.mockResolvedValue({
