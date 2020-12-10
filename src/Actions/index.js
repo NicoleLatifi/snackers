@@ -1,3 +1,4 @@
-export const addSnack = () => ({
-  type: 'ADD_SNACK'
+export const addRecurringId = (snackId) => ({
+  type: 'ADD_RECURRING_ID',
+  snackId
 });
