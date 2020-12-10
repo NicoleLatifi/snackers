@@ -5,7 +5,9 @@ import RecurringSnacks from '../RecurringSnacks/RecurringSnacks'
 import Error from '../Error/Error'
 import { getAllSnacksIds, getSnackDetail, getSnackPrice } from '../../Helpers/apiCalls'
 import noImage from "../../Helpers/icons/snack.png"
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { addRecurringId } from '../../Actions/index'
+import { connect } from 'react-redux'
 
 class Snacks extends Component {
   constructor() {
@@ -81,19 +83,19 @@ class Snacks extends Component {
   }
 
   addSnack = async (snackId) => {
-    await this.setState( prevState => ({ 
-      allSnacksDetails: {
-        ...prevState.allSnacksDetails,
-        [snackId]: {
-          ...prevState.allSnacksDetails[snackId],
-          recurringStatus: "active",
-          quantity: 1
-        }
-      }
-    }))
+    let allSnacksDetails = Object.assign({}, this.state.allSnacksDetails)
+    console.log(allSnacksDetails[snackId])
+    allSnacksDetails[snackId].recurringStatus = "active"
+    allSnacksDetails[snackId].quantity = 1
+    console.log(allSnacksDetails[snackId])
+    this.setState({ allSnacksDetails })
+
+    this.props.addRecurringId(snackId, this.state.recurringSnacksIds) // first implementation of Redux
+
     if (!this.state.recurringSnacksIds.includes(snackId)) {
       await this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
     }
+
     this.calculateTotalPrice()
   }
 
@@ -203,4 +205,8 @@ class Snacks extends Component {
   }
 }
 
-export default Snacks;
+export const mapDispatchToProps = dispatch => ({
+  addRecurringId: (snackId) => dispatch( addRecurringId(snackId) )
+})
+
+export default connect(null, mapDispatchToProps)(Snacks)
