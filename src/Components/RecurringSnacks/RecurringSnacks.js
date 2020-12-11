@@ -1,9 +1,12 @@
-import React from 'react';
-import './RecurringSnacks.css';
+import React from 'react'
+import './RecurringSnacks.css'
 import RecurringSnackCard from '../RecurringSnackCard/RecurringSnackCard'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
-const RecurringSnacks = ({ allSnacksDetails, recurringSnacksIds, totalPrice, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
+const RecurringSnacks = ({ allSnacksDetails, totalPrice, addSnack, decreaseRecurringQuantity, increaseRecurringQuantity, removeFromRecurring, pauseRecurringSnack }) => {
+  const recurringSnacksIds = useSelector(state => state.recurringSnacksIds);
+  
   const recurringSnacksSection = recurringSnacksIds.map((snackId) => {
     return <RecurringSnackCard
       allSnacksDetails={allSnacksDetails}
@@ -35,7 +38,7 @@ export default RecurringSnacks
 RecurringSnacks.propTypes = {
   allSnacksDetails: PropTypes.object,
   recurringSnacksIds: PropTypes.array,
-  totalPrice: PropTypes.string,
+  // totalPrice: PropTypes.number,
   addSnack: PropTypes.func,
   decreaseRecurringQuantity: PropTypes.func,
   increaseRecurringQuantity: PropTypes.func,

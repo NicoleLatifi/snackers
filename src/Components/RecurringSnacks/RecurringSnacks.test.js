@@ -18,7 +18,7 @@ describe('RecurringSnack Component', () => {
     }
   })
 
-  it('Should render message when there are no recurring snacks', () => {
+  it.skip('Should render message when there are no recurring snacks', () => {
     const recurringSnacksIds = [];
 
     render (
@@ -33,7 +33,7 @@ describe('RecurringSnack Component', () => {
     expect(message).toBeInTheDocument
   })
 
-  it('Should render any recurring snacks', () => {
+  it.skip('Should render any recurring snacks', () => {
     const recurringSnacksIds = [101]
 
     render (
