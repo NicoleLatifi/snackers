@@ -6,7 +6,7 @@ import Error from '../Error/Error'
 import { getAllSnacksIds, getSnackDetail, getSnackPrice } from '../../Helpers/apiCalls'
 import noImage from "../../Helpers/icons/snack.png"
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { addRecurringId } from '../../Actions/index'
+import { addRecurringId, removeRecurringId } from '../../Actions/index'
 import { connect } from 'react-redux'
 
 class Snacks extends Component {
@@ -17,7 +17,7 @@ class Snacks extends Component {
       allSnacksIds: [],
       // recurringSnacksIds: [],
       error: "",
-      totalPrice: "",
+      totalPrice: 0,
     }
   }
 
@@ -84,19 +84,16 @@ class Snacks extends Component {
 
   addSnack = async (snackId) => {
     let allSnacksDetails = Object.assign({}, this.state.allSnacksDetails)
-    console.log(allSnacksDetails[snackId])
+
     allSnacksDetails[snackId].recurringStatus = "active"
     allSnacksDetails[snackId].quantity = 1
-    console.log(allSnacksDetails[snackId])
+    
     this.setState({ allSnacksDetails })
 
     this.props.addRecurringId(snackId) // first implementation of Redux
 
-    // if (!this.state.recurringSnacksIds.includes(snackId)) {
-    //   await this.setState({recurringSnacksIds: [...this.state.recurringSnacksIds, snackId]})
-    // }
-
     this.calculateTotalPrice()
+    console.log(typeof(this.state.totalPrice))
   }
 
   decreaseRecurringQuantity = async (snackId, fromRecurringPage) => {
@@ -141,13 +138,10 @@ class Snacks extends Component {
     this.calculateTotalPrice()
   }
 
-  // removeFromRecurring = (snackId) => {
-  //   let recurringSnacksIdsCopy = [...this.state.recurringSnacksIds]
-  //   const index = recurringSnacksIdsCopy.indexOf(snackId)
-  //   recurringSnacksIdsCopy.splice(index, 1)
-  //   this.setState({ recurringSnacksIds: recurringSnacksIdsCopy })
-  //   this.calculateTotalPrice()
-  // }
+  removeFromRecurring = (snackId) => {
+    this.props.removeRecurringId(snackId)
+    this.calculateTotalPrice()
+  }
 
   pauseRecurringSnack = (snackId) => {
     this.setState( prevState => ({ 
@@ -166,14 +160,14 @@ class Snacks extends Component {
       const recurringSnacksDetails = this.state.allSnacksDetails[recurringSnackId]
       const recurringSnackPrice = recurringSnacksDetails.price * recurringSnacksDetails.quantity
       total = parseFloat(total) + parseFloat(recurringSnackPrice)
-      return total.toFixed(2)
+      total = total.toFixed(2)
+      return total
     }, 0)
     this.setState({ totalPrice: newTotalPrice })
   }
 
   render() {
     const { allSnacksDetails, allSnacksIds, totalPrice, error } = this.state;
-    const { recurringSnacksIds } = this.props
     return (
       <Switch>
         <Route exact path='/'>
@@ -189,7 +183,6 @@ class Snacks extends Component {
         <Route path='/recurring-snacks'>
           <RecurringSnacks
           allSnacksDetails={allSnacksDetails}
-          recurringSnacksIds={recurringSnacksIds}
           totalPrice={totalPrice}
           addSnack={this.addSnack}
           decreaseRecurringQuantity={this.decreaseRecurringQuantity}
@@ -211,7 +204,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addRecurringId: (snackId) => dispatch( addRecurringId(snackId) )
+  addRecurringId: (snackId) => dispatch( addRecurringId(snackId) ),
+  removeRecurringId: (snackId) => dispatch( removeRecurringId(snackId) )
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Snacks)
