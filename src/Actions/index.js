@@ -8,13 +8,13 @@ export const removeRecurringId = (snackId) => ({
   snackId
 })
 
-export const allSnacksDetails = (snackId, recurringStatus) => ({
+export const updateRecurringStatus = (snackId, recurringStatus) => ({
   type: 'UPDATE_RECURRING_STATUS',
   snackId,
   recurringStatus
 })
 
-export const allSnacksDetails = (snackId, amount) => ({
+export const updateQuantity = (snackId, amount) => ({
   type: 'UPDATE_QUANTITY',
   snackId,
   amount
