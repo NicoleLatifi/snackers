@@ -108,18 +108,21 @@ class Snacks extends Component {
         }
       }))
     } else if (this.state.allSnacksDetails[snackId].quantity === 1) {
-      await this.setState( prevState => ({
-        allSnacksDetails: {
-          ...prevState.allSnacksDetails,
-          [snackId]: {
-            ...prevState.allSnacksDetails[snackId],
-            recurringStatus: "zeroed",
-            quantity: 0,
-          }
-        }
-      }))
-      if (fromRecurringPage === false) {
-        this.removeFromRecurring()
+      // await this.setState( prevState => ({
+      //   allSnacksDetails: {
+      //     ...prevState.allSnacksDetails,
+      //     [snackId]: {
+      //       ...prevState.allSnacksDetails[snackId],
+      //       recurringStatus: "zeroed",
+      //       quantity: 0,
+      //     }
+      //   }
+      // }))
+      // if (fromRecurringPage === false) {
+      //   this.removeFromRecurring()
+      // }
+      if (!fromRecurringPage === true) {
+        this.removeFromRecurring(snackId)
       }
     }
     this.calculateTotalPrice()
