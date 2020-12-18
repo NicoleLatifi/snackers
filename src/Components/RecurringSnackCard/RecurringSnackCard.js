@@ -41,7 +41,7 @@ const RecurringSnackCard = ({ allSnacksDetails, snackId, addSnack, decreaseRecur
               snackId={snackId}
               buttonText="-"
               buttonType="Decrease"
-              fromRecurringPage="true"
+              fromRecurringPage={true}
               decreaseRecurringQuantity={decreaseRecurringQuantity}
               increaseRecurringQuantity={increaseRecurringQuantity}
             /> 
